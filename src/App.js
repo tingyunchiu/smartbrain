@@ -1,25 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import Nav from './components/nav/Nav.js';
+import Greeting from './components/greeting/Greeting.js';
+import Text from './components/text/Text.js';
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const [isLogin, setIsLogin] = useState(false);
+
+	return (
+    	<div style={{ textAlign: "center"}}>
+    		<Nav isLogin = {isLogin} ChangeLogin = {setIsLogin}/>
+    		<Greeting />
+    		<Text />
+    	</div>
+  	);
 }
 
 export default App;

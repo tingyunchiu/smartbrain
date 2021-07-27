@@ -10,9 +10,10 @@ function Text() {
 
 
 	const embed = function () {
-		setScores('')
-		// Load the model.
-		use.load().then(model => {
+		setScores('Loading...')
+		if (text1.length > 0 & text2.length > 0){
+			// Load the model.
+			use.load().then(model => {
 				// Embed an array of sentences.
   				model.embed([text1,text2])
   				.then(embeddings => {
@@ -21,9 +22,13 @@ function Text() {
                 	tf.slice(embeddings, [1, 0], [1]), false, true)
               		.dataSync();
               	setScores(score[0])
+  				});
   			});
+		} else {
+			alert('Please say something!');
+			setScores('0');
+		}
 
-		});
 	}
 
   	return (
@@ -31,14 +36,14 @@ function Text() {
     		<div>
     			<p> Please enter two sentences and end each sentence with a period.</p>
     		</div>
-	    	<div>
+	    	<div style={{"padding": "20px"}} >
 	    		<input type="text"
 	    				style={{"height": "100px", "width": "400px"}}
 	    				placeholder='The weather is nice today.'
 	    				value={text1}
 	    				onChange={(event) => setText1(event.target.value)} />
 	    	</div>
-	    	<div>
+	    	<div style={{"padding": "20px"}}>
 	    		<input type="text"
 	    				style={{"height": "100px", "width": "400px"}}
 	    				placeholder='NBA is starting!'

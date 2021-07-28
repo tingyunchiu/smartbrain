@@ -1,9 +1,9 @@
 import React from 'react';
 
 
-function Greeting() {
+function Greeting({userName}) {
   return (
-    <h1> Hello! Tammy </h1>
+    <h1> {`Hello! ${userName}`} </h1>
   );
 }
 

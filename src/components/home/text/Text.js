@@ -1,17 +1,34 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import * as tf from '@tensorflow/tfjs-core';
 require('@tensorflow/tfjs');
 const use = require('@tensorflow-models/universal-sentence-encoder');
 
-function Text() {
+function Text({userID}) {
 	const [text1, setText1] = useState('');
 	const [text2, setText2] = useState('');
 	const [scores, setScores] = useState(0);
+	const [isloaded, setIsloaded] = useState(true);
 
+	useEffect(() => {
+		fetch('http://localhost:3001/api/scores', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        id: userID,
+                        scores: scores
+                    })
+            })
+            .then(response =>response.json())
+            .then(data => {
+                console.log(data)
+        })
+	}, [userID, scores])
 
 	const embed = function () {
-		setScores('Loading...')
-		if (text1.length > 0 & text2.length > 0){
+		setIsloaded(false);
+		if (text1.length > 0 && text2.length > 0){
 			// Load the model.
 			use.load().then(model => {
 				// Embed an array of sentences.
@@ -21,7 +38,8 @@ function Text() {
                 	tf.slice(embeddings, [0, 0], [1]),
                 	tf.slice(embeddings, [1, 0], [1]), false, true)
               		.dataSync();
-              	setScores(score[0])
+              	setScores(parseFloat(score[0].toFixed(4)));
+              	setIsloaded(true);
   				});
   			});
 		} else {
@@ -54,7 +72,9 @@ function Text() {
 	    		<button onClick={() => embed([text1,text2])}> Detect </button>
 	    	</div>
 	    	<div>
-	    		<h2> Similar: {scores}</h2>
+	    		{isloaded ? <h2> Similar: {scores}</h2>
+	    				 : <h2> Just a second...</h2>
+	    		}
 	    	</div>
     	</div>
   );

@@ -23,10 +23,7 @@ function Signup({signupButton}) {
             })
             .then(response =>response.json())
             .then(data => {
-                if (data ==='Welcome!') {
-                    alert('Welcome!')
-                    signupButton()
-                }
+                signupButton()
             })
         }else {
             alert('Please tell me a little about you...')
@@ -45,7 +42,7 @@ function Signup({signupButton}) {
     		</div>
     		<div>
     			<h2>Password: </h2>
-    			<input type="text" onChange = {(e) => setSignupPassword(e.target.value)}/>
+    			<input type="password" onChange = {(e) => setSignupPassword(e.target.value)}/>
     		</div>
     		<div>
     			<button onClick = {onSignupClicked} >Sign Up</button>

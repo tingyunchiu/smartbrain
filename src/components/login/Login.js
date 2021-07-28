@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-function Login({loginButton, signupButton} ) {
+function Login({loginButton, signupButton, getCurrentUser} ) {
     const [loginEmail, setLoginEmail] = useState('');
     const [loginPassword, setLoginPassword] = useState('');
 
@@ -18,6 +18,7 @@ function Login({loginButton, signupButton} ) {
         .then(response =>response.json())
         .then(data => {
             if (data ==='Welcome!') {
+                getCurrentUser(loginEmail)
                loginButton()
             } else{
                 alert('Try Again!')
@@ -33,7 +34,7 @@ function Login({loginButton, signupButton} ) {
     		</div>
     		<div>
     			<h2>Password: </h2>
-    			<input type="text" onChange = {(e) => setLoginPassword(e.target.value)}/>
+    			<input type="password" onChange = {(e) => setLoginPassword(e.target.value)}/>
     		</div>
     		<div>
     			<button type="button" onClick = {onLoginClicked} >Log in</button>

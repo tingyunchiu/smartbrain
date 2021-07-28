@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setLoggedIn } from './components/login/loginActions';
 import { setSignedUp } from './components/signup/signupActions';
+import { setUserEmail } from './userActions';
 
 import Login from './components/login/Login.js';
 import Signup from './components/signup/Signup.js';
@@ -13,7 +14,8 @@ import Home from './components/home/Home.js';
 const mapStateToProps = (state) => {
   return {
     loggedIn: state.Loggedin.loggedIn,
-    signedUp: state.Signedup.signedUp
+    signedUp: state.Signedup.signedUp,
+    currentUser: state.GetCurrentUser.userEmail
   }
 }
 
@@ -22,26 +24,28 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     loginButtonClick: () => dispatch(setLoggedIn()),
-    signupButtonClick: () => dispatch(setSignedUp())
+    signupButtonClick: () => dispatch(setSignedUp()),
+    getCurrentUser: (text) => dispatch(setUserEmail(text))
   }
 }
 
-function App({ loggedIn, loginButtonClick, signedUp, signupButtonClick}) {
+function App({ loggedIn, loginButtonClick, signedUp, signupButtonClick, currentUser, getCurrentUser}) {
 
 	return (
 		<BrowserRouter>
         	<Switch>
           		<Route exact path="/">
-          			{loggedIn ? <Home loggedIn = {loggedIn}
-                                  loginButton = {loginButtonClick}/>
+          			{loggedIn ? <Home loginButton = {loginButtonClick}
+                                  currentUser = {currentUser}
+                                  getCurrentUser = {getCurrentUser}/>
              					: <Redirect to="/login" /> }
           		</Route>
           		<Route exact path="/login">
              		{signedUp ? (loggedIn ? <Redirect to="/" />
-                                      : <Login loggedIn = {loggedIn}
-                                                signedUp = {signedUp}
-                                                loginButton = {loginButtonClick}
-                                                signupButton = {signupButtonClick}/>)
+                                      : <Login loginButton = {loginButtonClick}
+                                               signupButton = {signupButtonClick}
+                                              getCurrentUser = {getCurrentUser}
+                                              />)
                           :  <Redirect to="/signup" />
                 }
           		</Route>

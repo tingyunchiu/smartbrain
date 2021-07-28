@@ -4,13 +4,16 @@ import { createStore, combineReducers} from 'redux';
 import { Provider } from 'react-redux';
 import { Loggedin} from './components/login/loginReducers';
 import { Signedup} from './components/signup/signupReducers';
+import { GetCurrentUser} from './userReducers';
 
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 const rootReducers = combineReducers({Loggedin,
-									  Signedup})
+									  Signedup,
+									  GetCurrentUser
+									})
 const store = createStore(rootReducers)
 
 

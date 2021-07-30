@@ -1,30 +1,36 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import * as tf from '@tensorflow/tfjs-core';
 require('@tensorflow/tfjs');
 const use = require('@tensorflow-models/universal-sentence-encoder');
 
-function Text({userID}) {
+function Text({userName, userEmail}) {
 	const [text1, setText1] = useState('');
 	const [text2, setText2] = useState('');
 	const [scores, setScores] = useState(0);
 	const [isloaded, setIsloaded] = useState(true);
+	const didMount = useRef(false);
 
 	useEffect(() => {
-		fetch('http://localhost:3001/api/scores', {
+		if (didMount.current) {
+      		fetch('http://localhost:3001/api/scores', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
-                        id: userID,
+                    	name: userName,
+                        email: userEmail,
                         scores: scores
                     })
-            })
-            .then(response =>response.json())
-            .then(data => {
-                console.log(data)
-        })
-	}, [userID, scores])
+            	})
+            	.then(response =>response.json())
+            	.then(data => {
+                	console.log(data)
+        		})
+    	} else {
+      		didMount.current = true;
+      	}
+    }, [scores,userName,userEmail])
 
 	const embed = function () {
 		setIsloaded(false);

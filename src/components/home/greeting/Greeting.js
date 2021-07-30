@@ -3,7 +3,10 @@ import React from 'react';
 
 function Greeting({userName}) {
   return (
-    <h1> {`Hello! ${userName}`} </h1>
+    <div>
+      <h1> {`Hello! ${userName}`} </h1>
+      <button type="button" > My records</button>
+    </div>
   );
 }
 

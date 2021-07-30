@@ -17,8 +17,8 @@ function Login({loginButton, signupButton, getCurrentUser} ) {
         })
         .then(response =>response.json())
         .then(data => {
-            if (data ==='Welcome!') {
-                getCurrentUser(loginEmail)
+            if (data.email === loginEmail) {
+                getCurrentUser(data)
                loginButton()
             } else{
                 alert('Try Again!')

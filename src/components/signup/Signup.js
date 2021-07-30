@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 
-
 function Signup({signupButton}) {
     const [signupName, setSignupName] = useState('');
     const [signupEmail, setSignupEmail] = useState('');
@@ -42,7 +41,8 @@ function Signup({signupButton}) {
     		</div>
     		<div>
     			<h2>Password: </h2>
-    			<input type="password" onChange = {(e) => setSignupPassword(e.target.value)}/>
+    			<input type="password"
+                        onChange = {(e) => setSignupPassword(e.target.value)}/>
     		</div>
     		<div>
     			<button onClick = {onSignupClicked} >Sign Up</button>

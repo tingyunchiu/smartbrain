@@ -18,12 +18,14 @@ function Login({loginButton, signupButton, getCurrentUser} ) {
         .then(response =>response.json())
         .then(data => {
             if (data.email === loginEmail) {
+                console.log(data)
                 getCurrentUser(data)
-               loginButton()
-            } else{
-                alert('Try Again!')
+                loginButton()
+            }else {
+                alert("Sorry! But, we don't know who you are")
             }
         })
+        .catch(err => alert("Please try again!"))
     }
 
 	return (

@@ -3,7 +3,7 @@ import * as tf from '@tensorflow/tfjs-core';
 require('@tensorflow/tfjs');
 const use = require('@tensorflow-models/universal-sentence-encoder');
 
-function Text({userName, userEmail}) {
+function Text({userid}) {
 	const [text1, setText1] = useState('');
 	const [text2, setText2] = useState('');
 	const [scores, setScores] = useState(0);
@@ -18,19 +18,18 @@ function Text({userName, userEmail}) {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
-                    	name: userName,
-                        email: userEmail,
+                    	uid: userid,
                         scores: scores
                     })
             	})
             	.then(response =>response.json())
             	.then(data => {
-                	console.log(data)
+                	alert('The score of: ' + scores +' has been added!');
         		})
     	} else {
       		didMount.current = true;
       	}
-    }, [scores,userName,userEmail])
+    }, [scores,userid])
 
 	const embed = function () {
 		setIsloaded(false);

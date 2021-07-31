@@ -1,5 +1,6 @@
 import React from 'react';
 import Greeting from './greeting/Greeting.js';
+import Record from './record/Record.js';
 import Text from './text/Text.js';
 
 function Home({loginButton, currentUser, getCurrentUser}) {
@@ -8,7 +9,7 @@ function Home({loginButton, currentUser, getCurrentUser}) {
         getCurrentUser('');
         loginButton()
     }
-
+    console.log(currentUser)
     return (
 		<div style = {{"textAlign": "center"}}>
     		<div>
@@ -17,8 +18,11 @@ function Home({loginButton, currentUser, getCurrentUser}) {
     		<div>
     			<Greeting userName = {currentUser.name}/>
     		</div>
+            <div>
+                <Record userid = {currentUser.uid}/>
+            </div>
     		<div>
-            	<Text userName = {currentUser.name} userEmail = {currentUser.email}/>
+            	<Text userid = {currentUser.uid}/>
             </div>
     	</div>
   	)

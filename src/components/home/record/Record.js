@@ -5,7 +5,7 @@ function Record({userid}) {
 
   useEffect(() => {
     const getScores = () => {
-      fetch('http://localhost:3001/api/home/' + userid)
+      fetch('https://fathomless-journey-15048.herokuapp.com/api/home/' + userid)
       .then(response =>response.json())
       .then(data => {
         setRecords(data)

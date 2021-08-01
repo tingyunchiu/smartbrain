@@ -12,7 +12,7 @@ function Text({userid}) {
 
 	useEffect(() => {
 		if (didMount.current) {
-      		fetch('http://localhost:3001/api/scores', {
+      		fetch('https://fathomless-journey-15048.herokuapp.com/api/scores', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'

@@ -9,7 +9,7 @@ function Signup({ signupButton }) {
         if (signupName.length > 0 &&
             signupEmail.length > 0 &&
             signupPassword.length > 0) {
-            fetch('http://localhost:3001/api/signup', {
+            fetch('https://fathomless-journey-15048.herokuapp.com/api/signup', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'

@@ -5,7 +5,7 @@ function Login({loginButton, signupButton, getCurrentUser} ) {
     const [loginPassword, setLoginPassword] = useState('');
 
     const onLoginClicked = () => {
-        fetch('http://localhost:3001/api/login', {
+        fetch('https://fathomless-journey-15048.herokuapp.com/api/login', {
              method: 'POST',
              headers: {
                 'Content-Type': 'application/json'

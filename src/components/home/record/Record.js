@@ -1,17 +1,26 @@
 import React, {useState, useEffect} from 'react';
 
 function Record({userid}) {
-  const [record, setRecord] = useState([]);
+  const [records, setRecords] = useState([]);
 
-  fetch('http://localhost:3001/api/home/' + userid)
-  .then(response =>response.json())
-  .then(data => {
-    setRecord(data)
-  })
+  useEffect(() => {
+    const getScores = () => {
+      fetch('http://localhost:3001/api/home/' + userid)
+      .then(response =>response.json())
+      .then(data => {
+        setRecords(data)
+      })
+      .catch(err =>  {
+        setRecords([])
+      })
+    }
+    const intervalId = setInterval(getScores(), 1*60*1000)
+    return () => clearInterval(intervalId);
+  }, [userid, records])
 
   return (
     <div>
-      {record.map(r => <span>{r}, </span>)}
+      {records.map((record, index) => <span key={index}> {record} , </span>)}
     </div>
   );
 }

@@ -6,10 +6,10 @@ import Text from './text/Text.js';
 function Home({loginButton, currentUser, getCurrentUser}) {
 
     const onLogoutclick = () => {
-        getCurrentUser('');
+        getCurrentUser({});
         loginButton()
     }
-    console.log(currentUser)
+
     return (
 		<div style = {{"textAlign": "center"}}>
     		<div>

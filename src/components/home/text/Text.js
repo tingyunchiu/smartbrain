@@ -1,4 +1,10 @@
 import React, {useState, useEffect, useRef} from 'react';
+import { Grid } from '@material-ui/core';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import { Typography } from '@material-ui/core';
+import { TextareaAutosize } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import * as tf from '@tensorflow/tfjs-core';
 require('@tensorflow/tfjs');
 const use = require('@tensorflow-models/universal-sentence-encoder');
@@ -49,39 +55,57 @@ function Text({userid}) {
   			});
 		} else {
 			alert('Please say something!');
-			setScores('0');
+			setScores(0);
 		}
 
 	}
 
   	return (
-    	<div>
-    		<div>
-    			<p> Please enter two sentences and end each sentence with a period.</p>
-    		</div>
-	    	<div style={{"padding": "20px"}} >
-	    		<input type="text"
-	    				style={{"height": "100px", "width": "400px"}}
-	    				placeholder='The weather is nice today.'
-	    				value={text1}
-	    				onChange={(event) => setText1(event.target.value)} />
-	    	</div>
-	    	<div style={{"padding": "20px"}}>
-	    		<input type="text"
-	    				style={{"height": "100px", "width": "400px"}}
-	    				placeholder='NBA is starting!'
-	    				value={text2}
-	    				onChange={(event) => setText2(event.target.value)} />
-	    	</div>
-	    	<div>
-	    		<button onClick={() => embed([text1,text2])}> Detect </button>
-	    	</div>
-	    	<div>
-	    		{isloaded ? <h2> Similar: {scores}</h2>
-	    				 : <h2> Just a second...</h2>
+    	<Grid container direction="row" justifyContent="center" alignItems="center">
+  			<Card>
+                <CardContent>
+                    <Typography variant="body1">
+                        This is excited! 
+                        Type in something in the two boxes below and we will help you find how similar these messages are.
+                    </Typography>
+                </CardContent>
+                <CardContent>
+                    <TextareaAutosize
+  						maxRows={4}
+  						style={{maxWidth: "100%"}}
+  						aria-label="maximum height"
+  						placeholder="The first word, sentence or paragraph here"
+  						onChange={(event) => setText1(event.target.value)}
+					/>
+                </CardContent>
+                <CardContent>
+                	<TextareaAutosize
+  						maxRows={4}
+  						style={{maxWidth: "100%"}}
+  						aria-label="maximum height"
+  						placeholder="The second word, sentence or paragraph here"
+  						onChange={(event) => setText2(event.target.value)}
+					/>
+                </CardContent>
+                <div justifyContent="center" alignItems="center">
+                    <Button variant="contained" style ={{color:"#2196f3"}} onClick={() => embed([text1,text2])}>
+                    	Detect!
+                    </Button>
+                </div>
+                {isloaded
+                	? <CardContent>
+                    		<Typography variant="body1">
+                        		They are {scores*100} % simialr!
+                    		</Typography>
+                	  </CardContent>
+	    			: <CardContent>
+                    		<Typography variant="body1">
+                        		We know it takes a while but just a second...
+                    		</Typography>
+                	  </CardContent>
 	    		}
-	    	</div>
-    	</div>
+            </Card>
+        </Grid>
   );
 }
 

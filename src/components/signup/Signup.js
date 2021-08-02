@@ -1,4 +1,11 @@
 import React, { useState } from 'react';
+import { Grid } from '@material-ui/core';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import { Typography } from '@material-ui/core';
+import { TextField  } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 
 function Signup({ signupButton }) {
     const [signupName, setSignupName] = useState('');
@@ -34,25 +41,46 @@ function Signup({ signupButton }) {
     }
 
     return (
-        <div style = {{"textAlign": "center"}}>
-            <div>
-                <h2>Name: </h2>
-                <input type="text" onChange = {(e) => setSignupName(e.target.value)}/>
-            </div>
-            <div>
-                <h2>Email: </h2>
-                <input type="text" onChange = {(e) => setSignupEmail(e.target.value)}/>
-            </div>
-            <div>
-                <h2>Password: </h2>
-                <input type="password"
-                        onChange = {(e) => setSignupPassword(e.target.value)}/>
-            </div>
-            <div>
-                <button onClick = {onSignupClicked} >Sign Up</button>
-                <button onClick = {signupButton} >Log in</button>
-            </div>
-        </div>
+        <Grid container direction="row" justifyContent="center" alignItems="center">
+            <Card>
+                <CardContent>
+                    <Typography variant="body2" color="textSecondary" gutterBottom>
+                        Welcome! Just a few steps to join.
+                    </Typography>
+                </CardContent>
+                <CardContent>
+                    <Typography variant="body2" >Name</Typography>
+                    <TextField required
+                                id="standard-required"
+                                label="Required"
+                                onChange = {(e) => setSignupName(e.target.value)}
+                    />
+                </CardContent>
+                <CardContent>
+                    <Typography variant="body2" >Email</Typography>
+                    <TextField required
+                                id="standard-required"
+                                label="Required"
+                                onChange = {(e) => setSignupEmail(e.target.value)}
+                    />
+                </CardContent>
+                <CardContent>
+                    <Typography variant="body2" >Password</Typography>
+                    <TextField required
+                                id="standard-password-input"
+                                label="Password"
+                                type="password"
+                                onChange = {(e) => setSignupPassword(e.target.value)}
+                    />
+                </CardContent>
+                <CardActions>
+                    <Button variant="outlined" color="secondary" onClick = {onSignupClicked}>Sign up
+                    </Button>
+                    <Button variant="outlined" color="primary" onClick = {signupButton}>Log in
+                    </Button>
+                </CardActions>
+            </Card>
+        </Grid>
     );
 }
 

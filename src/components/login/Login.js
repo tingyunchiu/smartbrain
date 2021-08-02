@@ -1,4 +1,11 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
+import { Grid } from '@material-ui/core';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import { Typography } from '@material-ui/core';
+import { TextField  } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 
 function Login({loginButton, signupButton, getCurrentUser} ) {
     const [loginEmail, setLoginEmail] = useState('');
@@ -28,20 +35,38 @@ function Login({loginButton, signupButton, getCurrentUser} ) {
     }
 
 	return (
-		<div style = {{"textAlign": "center"}}>
-    		<div>
-    			<h2>Email: </h2>
-    			<input type="text" onChange = {(e) => setLoginEmail(e.target.value)}/>
-    		</div>
-    		<div>
-    			<h2>Password: </h2>
-    			<input type="password" onChange = {(e) => setLoginPassword(e.target.value)}/>
-    		</div>
-    		<div>
-    			<button type="button" onClick = {onLoginClicked} >Log in</button>
-                <button type="button" onClick = {signupButton} >Sign up</button>
-    		</div>
-    	</div>
+        <Grid container direction="row" justifyContent="center" alignItems="center">
+            <Card>
+                <CardContent>
+                    <Typography variant="body2" color="textSecondary" gutterBottom>
+                        So Happy to see you again!
+                    </Typography>
+                </CardContent>
+                <CardContent>
+                    <Typography variant="body2" >Email</Typography>
+                    <TextField required
+                                    id="standard-required"
+                                    label="Required"
+                                    onChange = {(e) => setLoginEmail(e.target.value)}
+                    />
+                </CardContent>
+                <CardContent>
+                    <Typography variant="body2" >Password</Typography>
+                    <TextField required
+                                    id="standard-password-input"
+                                    label="Password"
+                                    type="password"
+                                    onChange = {(e) => setLoginPassword(e.target.value)}
+                    />
+                </CardContent>
+                <CardActions>
+                    <Button variant="outlined" color="primary" onClick = {onLoginClicked}>Log in
+                    </Button>
+                    <Button variant="outlined" color="secondary" onClick = {signupButton}>Sign up
+                    </Button>
+                </CardActions>
+            </Card>
+        </Grid>
   	)
 }
 

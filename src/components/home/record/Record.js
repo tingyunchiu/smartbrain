@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import { Paper } from '@material-ui/core';
 
 function Record({userid}) {
   const [records, setRecords] = useState([]);
@@ -19,10 +20,11 @@ function Record({userid}) {
   }, [userid, records])
 
   return (
-    <div>
+    <Paper >
       {records.map((record, index) => <span key={index}> {record} , </span>)}
-    </div>
+    </Paper>
   );
 }
 
 export default Record;
+

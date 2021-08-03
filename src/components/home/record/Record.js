@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { Paper } from '@material-ui/core';
+import Plot from './Plot.js';
 
 function Record({userid}) {
   const [records, setRecords] = useState([]);
@@ -20,9 +20,7 @@ function Record({userid}) {
   }, [userid, records])
 
   return (
-    <Paper >
-      {records.map((record, index) => <span key={index}> {record} , </span>)}
-    </Paper>
+    <Plot records = {records}/>
   );
 }
 

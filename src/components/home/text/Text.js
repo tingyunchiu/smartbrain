@@ -64,8 +64,8 @@ function Text({userid}) {
     	<Grid container direction="row" justifyContent="center" alignItems="center">
   			<Card>
                 <CardContent>
-                    <Typography variant="body1">
-                        This is excited! 
+                    <Typography variant="body1" align="justify">
+                        This is excited!
                         Type in something in the two boxes below and we will help you find how similar these messages are.
                     </Typography>
                 </CardContent>
@@ -95,7 +95,7 @@ function Text({userid}) {
                 {isloaded
                 	? <CardContent>
                     		<Typography variant="body1">
-                        		They are {scores*100} % simialr!
+                        		They are {(scores*100).toFixed(2)} % simialr!
                     		</Typography>
                 	  </CardContent>
 	    			: <CardContent>

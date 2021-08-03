@@ -22,14 +22,16 @@ function Home({loginButton, currentUser, getCurrentUser}) {
             <div style = {{"margin": "20px"}}>
                 <Greeting userName = {currentUser.name}/>
             </div>
-            <Grid container spacing={3} style = {{"margin": "20px"}}>
-                <Grid item xs={12} sm = {6}>
-                    <Text userid = {currentUser.uid}/>
+            <div style = {{"margin": "20px"}}>
+                <Grid container spacing={3}>
+                    <Grid item xs={12} sm = {6}>
+                        <Text userid = {currentUser.uid}/>
+                    </Grid>
+                    <Grid item xs={12} sm = {6}>
+                        <Record userid = {currentUser.uid}/>
+                    </Grid>
                 </Grid>
-                <Grid item xs={12} sm = {6}>
-                    <Record userid = {currentUser.uid}/>
-                </Grid>
-            </Grid>
+            </div>
     	</div>
   	)
 }

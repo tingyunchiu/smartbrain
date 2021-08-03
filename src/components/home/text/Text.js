@@ -87,7 +87,7 @@ function Text({userid}) {
   						onChange={(event) => setText2(event.target.value)}
 					/>
                 </CardContent>
-                <div justifyContent="center" alignItems="center">
+                <div style={{"justifyContent": "center", "alignItems": "center"}}>
                     <Button variant="contained" style ={{color:"#2196f3"}} onClick={() => embed([text1,text2])}>
                     	Detect!
                     </Button>

@@ -15,9 +15,15 @@ function Record({userid}) {
         setRecords([])
       })
     }
-    const intervalId = setInterval(getScores(), 1*60*1000)
-    return () => clearInterval(intervalId);
-  }, [userid, records])
+
+    const id = setInterval(() => {
+      getScores();
+    }, 60000);
+
+    getScores();
+
+    return () => clearInterval(id);
+  }, [userid])
 
   return (
     <Plot records = {records}/>

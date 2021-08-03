@@ -51,7 +51,7 @@ function Signup({ signupButton }) {
                 <CardContent>
                     <Typography variant="body2" >Name</Typography>
                     <TextField required
-                                id="standard-required"
+                                id="standard-required-name"
                                 label="Required"
                                 onChange = {(e) => setSignupName(e.target.value)}
                     />

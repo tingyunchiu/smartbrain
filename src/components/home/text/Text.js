@@ -9,7 +9,7 @@ import * as tf from '@tensorflow/tfjs-core';
 require('@tensorflow/tfjs');
 const use = require('@tensorflow-models/universal-sentence-encoder');
 
-function Text({userid}) {
+function Text({userid, getRecords}) {
 	const [text1, setText1] = useState('');
 	const [text2, setText2] = useState('');
 	const [scores, setScores] = useState(0);
@@ -19,23 +19,26 @@ function Text({userid}) {
 	useEffect(() => {
 		if (didMount.current) {
       		fetch('https://fathomless-journey-15048.herokuapp.com/api/scores', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                    	uid: userid,
-                        scores: scores
-                    })
-            	})
-            	.then(response =>response.json())
-            	.then(data => {
-                	alert('The score of: ' + scores +' has been added!');
-        		})
-    	} else {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+               	},
+                body: JSON.stringify({
+                    uid: userid,
+                    scores: scores
+                })
+            })
+            .then(response =>response.json())
+            .then(data => {
+                alert('The score of: ' + scores + ' has been added!')
+        	})
+        	.catch(err =>  {
+        		alert('unable to add the score')
+      		})
+      	} else {
       		didMount.current = true;
       	}
-    }, [scores,userid])
+    }, [scores, userid, getRecords])
 
 	const embed = function () {
 		setIsloaded(false);
@@ -45,16 +48,18 @@ function Text({userid}) {
 				// Embed an array of sentences.
   				model.embed([text1,text2])
   				.then(embeddings => {
-  				 const score =	tf.matMul(
+  				 let score = tf.matMul(
                 	tf.slice(embeddings, [0, 0], [1]),
                 	tf.slice(embeddings, [1, 0], [1]), false, true)
               		.dataSync();
-              	setScores(parseFloat(score[0].toFixed(4)));
+              	score = parseFloat(score[0].toFixed(4))
+              	setScores(score);
               	setIsloaded(true);
   				});
   			});
 		} else {
 			alert('Please say something!');
+			setIsloaded(true);
 			setScores(0);
 		}
 
@@ -66,7 +71,11 @@ function Text({userid}) {
                 <CardContent>
                     <Typography variant="body1" align="justify">
                         This is excited!
-                        Type in something in the two boxes below and we will help you find how similar these messages are.
+                        Type in something in the two boxes below
+                        and we will help you find how similar these messages are.
+                    </Typography>
+                    <Typography variant="body1" align="center">
+                        We only support English now.
                     </Typography>
                 </CardContent>
                 <CardContent>

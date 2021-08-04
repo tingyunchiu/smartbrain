@@ -1,5 +1,4 @@
 import React from 'react';
-import Paper from '@material-ui/core/Paper';
 import {
   ArgumentAxis,
   ValueAxis,
@@ -15,13 +14,13 @@ function Plot ({records}) {
   }
 
   return(
-    <Paper>
+    <div>
       <Chart data={data} height={400}>
         <ArgumentAxis />
         <ValueAxis />
         <LineSeries valueField="value" argumentField="argument" />
       </Chart>
-    </Paper>
+    </div>
   )
 };
 

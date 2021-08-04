@@ -25,10 +25,10 @@ function Home({loginButton, currentUser, getCurrentUser}) {
             <div style = {{"margin": "20px"}}>
                 <Grid container spacing={3}>
                     <Grid item xs={12} sm = {6}>
-                        <Text userid = {currentUser.uid}/>
+                        <Text userid = {currentUser.uid} />
                     </Grid>
                     <Grid item xs={12} sm = {6}>
-                        <Record userid = {currentUser.uid}/>
+                        <Record userid = {currentUser.uid} />
                     </Grid>
                 </Grid>
             </div>

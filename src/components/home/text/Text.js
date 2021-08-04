@@ -95,7 +95,7 @@ function Text({userid}) {
                 {isloaded
                 	? <CardContent>
                     		<Typography variant="body1">
-                        		They are {(scores*100).toFixed(2)} % simialr!
+                        		They are {(scores*100).toFixed(2)} % similar!
                     		</Typography>
                 	  </CardContent>
 	    			: <CardContent>

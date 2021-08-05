@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, { useState } from 'react';
 import { Grid } from '@material-ui/core';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -9,60 +9,32 @@ import * as tf from '@tensorflow/tfjs-core';
 require('@tensorflow/tfjs');
 const use = require('@tensorflow-models/universal-sentence-encoder');
 
-function Text({userid, getRecords}) {
+function Text({score, settingScore}) {
 	const [text1, setText1] = useState('');
 	const [text2, setText2] = useState('');
-	const [scores, setScores] = useState(0);
 	const [isloaded, setIsloaded] = useState(true);
-	const didMount = useRef(false);
-
-	useEffect(() => {
-		if (didMount.current) {
-      		fetch('https://fathomless-journey-15048.herokuapp.com/api/scores', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-               	},
-                body: JSON.stringify({
-                    uid: userid,
-                    scores: scores
-                })
-            })
-            .then(response =>response.json())
-            .then(data => {
-                alert('The score of: ' + scores + ' has been added!')
-        	})
-        	.catch(err =>  {
-        		alert('unable to add the score')
-      		})
-      	} else {
-      		didMount.current = true;
-      	}
-    }, [scores, userid, getRecords])
 
 	const embed = function () {
-		setIsloaded(false);
 		if (text1.length > 0 && text2.length > 0){
-			// Load the model.
-			use.load().then(model => {
+			setIsloaded(false);
+            // Load the model.
+			use.load()
+            .then(model => {
 				// Embed an array of sentences.
   				model.embed([text1,text2])
-  				.then(embeddings => {
-  				 let score = tf.matMul(
+      			.then(embeddings => {
+  				  let score = tf.matMul(
                 	tf.slice(embeddings, [0, 0], [1]),
                 	tf.slice(embeddings, [1, 0], [1]), false, true)
               		.dataSync();
               	score = parseFloat(score[0].toFixed(4))
-              	setScores(score);
+              	settingScore(score);
               	setIsloaded(true);
-  				});
-  			});
+  			   });
+            });
 		} else {
 			alert('Please say something!');
-			setIsloaded(true);
-			setScores(0);
 		}
-
 	}
 
   	return (
@@ -104,7 +76,7 @@ function Text({userid, getRecords}) {
                 {isloaded
                 	? <CardContent>
                     		<Typography variant="body1">
-                        		They are {(scores*100).toFixed(2)} % similar!
+                        		They are {(score*100).toFixed(2)} % similar!
                     		</Typography>
                 	  </CardContent>
 	    			: <CardContent>

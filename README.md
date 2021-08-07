@@ -15,8 +15,8 @@ allow user to type in two texts (words, sentences, paragrpahs) that they want to
 the model will start running if both text inputs are not null  <br>
 alert the user to fill in both inputs if one of the text inputs is null  <br>
 - warm text reminder: <br>
-tell the user (1) how similar these two texts are and (2) that the similarity score has been sucessfully added into database
-or tell the user that the model is currently running <br>
+tell the user (1) how similar these two texts are and (2) that the similarity score has been sucessfully added into database <br>
+or tell the user that the model is currently running 
 3. plot:
 - everytime a new score comes out, the plot will update and display all the scores of this user
 

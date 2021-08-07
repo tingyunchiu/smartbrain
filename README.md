@@ -28,8 +28,7 @@ small screen (< 600 px): <br/>
 large screen: <br/>
 ![largeScreen](/images/largeScreen.png)
 3. Used **the Universal Sentence Encoder**, a pretrained model for TensorFlow.js, to calculate a similarity score of two input texts
-4. Used **Express** as a server and **Knex** to communicate with Postgres database
-5. Connected frontend and backend with **restful APIs**
-6. Deployed frontend and backend to **Heroku**
+4. Connected to the backend with **restful APIs**
+5. Deployed to **Heroku**
 
 ## Backend at: [Backend](https://github.com/tingyunchiu/smartbrain_api)
